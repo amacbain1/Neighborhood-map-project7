@@ -5,8 +5,8 @@ class Header extends Component {
 
   render(){
       return(
-        <div>
-          <h1>
+        <div className='header'>
+          <h1 className='lrg-text'>
             Neighborhood Map
           </h1>
         </div>
