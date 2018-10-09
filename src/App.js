@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header'
-//import TopSidebar from './Top-Sidebar'
-//import MapDiv from './MapDiv'
-//import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import './App.css';
-
+import TopSidebar from './Top-Sidebar'
+import MapDiv from './MapDiv'
+import './index.css';
+//import Locations from './Locations'
 
 class App extends Component {
 
@@ -25,19 +24,14 @@ class App extends Component {
     });
   }
 
-
-
   render() {
     return (
       <div className="App">
         <Header />
-
-        <main>
-
-          <div id="map">
-
-          </div>
-        </main>
+        <div className='wide-view'>
+          <TopSidebar />
+          <MapDiv />
+        </div>
       </div>
     );
   }

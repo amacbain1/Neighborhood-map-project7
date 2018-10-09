@@ -7,7 +7,7 @@ class Header extends Component {
       return(
         <div className='header'>
           <h1 className='lrg-text'>
-            Neighborhood Map
+            Points of Interest, Redlands CA
           </h1>
         </div>
 
