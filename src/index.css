@@ -50,21 +50,24 @@ div.drop-down {
 
 @media screen and (min-width: 600px) {
   html, body {
-    display: flex;
+    display: block;
 
   }
   div.wide-view {
-    flex-flow: row;
+
   }
   div.options {
-    width: 25%;
+    position: absolute;
+    z-index: 100;
+    width: 175px;
+    max-width: 75%;
     height: 100vh;
     margin: 0;
   }
   #map {
     height: 100vh;
-    width: 70%;
-    left: 30%;
+    /*width: 70%;
+    left: 30%;*/
     margin: 0;
 
   }
