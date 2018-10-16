@@ -8,39 +8,47 @@ import axios from 'axios'
 
 class App extends Component {
 
+  state = {localArts: []}
+
   componentDidMount() {
-    this.loadMap()
     this.getLocalArts()
   }
-
-
 
   loadMap = () => {
     getScriptURL('https://maps.googleapis.com/maps/api/js?key=AIzaSyDD6Pih0tlHoxYUN9YIL4aLSvAvZMoLknM&v=3&callback=initMap')
       window.initMap = this.initMap
   }
 
-getLocalArts = () => {
-    const endPoint = 'https://api.foursquare.com/v2/venues/explore?'
-    const parameters = {
-      client_id: '2VFYWEPSFX3JFVVNQEN1GQMJBLS42U3YXFG4ARNWQ2IFPXHB',
-      client_secret: 'I4VFI4PA3W1ZQRCFPKKSEN45ZYV0DM3I2AOHQOSGADY41EOH',
-      v: '20181015',
-      section: 'arts',
-      near: 'Redlands, CA',
-      limit: 6
-    }
-    axios.get(endPoint + new URLSearchParams(parameters))
-      .then(response => {
-        console.log(response.data.response.groups[0].items)
-      })
-
-}
+  getLocalArts = () => {
+      const endPoint = 'https://api.foursquare.com/v2/venues/explore?'
+      const parameters = {
+        client_id: '2VFYWEPSFX3JFVVNQEN1GQMJBLS42U3YXFG4ARNWQ2IFPXHB',
+        client_secret: 'I4VFI4PA3W1ZQRCFPKKSEN45ZYV0DM3I2AOHQOSGADY41EOH',
+        v: '20181015',
+        section: 'arts',
+        near: 'Redlands, CA',
+        limit: 10
+      }
+      axios.get(endPoint + new URLSearchParams(parameters))
+        .then(response => {
+          this.setState({
+            localArts: response.data.response.groups[0].items
+          }, this.loadMap())
+        })
+  }
 
   initMap = () =>{
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 34.0556, lng: -117.1825},
       zoom: 13
+    });
+    this.state.localArts.map(art => {
+      const marker = new window.google.maps.Marker({
+        position: {lat: art.venue.location.lat, lng: art.venue.location.lng},
+        map: map,
+        animation: window.google.maps.Animation.DROP,
+        title: art.venue.name
+      })
     });
   }
 
