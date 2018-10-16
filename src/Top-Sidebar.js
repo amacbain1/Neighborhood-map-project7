@@ -6,7 +6,7 @@ class TopSidebar extends Component {
   render(){
       return(
       <div className='options'>
-        <h2 className='top-sidebar'>Arts and Entertainment</h2>
+        <h2 className='top-sidebar'>Art and Theater</h2>
         <div className='drop-down'>
           <input className='see-museums' type='button' value='Places to see' />
           <input  className='hide-museums' type='button' value='Hide options' />

@@ -10,6 +10,7 @@ class App extends Component {
 
   state = {localArts: []}
 
+
   componentDidMount() {
     this.getLocalArts()
   }
@@ -42,13 +43,22 @@ class App extends Component {
       center: {lat: 34.0556, lng: -117.1825},
       zoom: 13
     });
+
+    const infowindow = new window.google.maps.InfoWindow()
+
     this.state.localArts.map(art => {
+      const contentString = `${art.venue.name} ${art.venue.location.address}`
       const marker = new window.google.maps.Marker({
         position: {lat: art.venue.location.lat, lng: art.venue.location.lng},
         map: map,
         animation: window.google.maps.Animation.DROP,
         title: art.venue.name
       })
+
+      marker.addListener('click', function() {
+        infowindow.setContent(contentString)
+        infowindow.open(map, marker);
+        });
     });
   }
 
