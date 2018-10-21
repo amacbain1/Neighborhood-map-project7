@@ -10,12 +10,12 @@ class TopSidebar extends Component {
     this.setState({
       query: query
     })
-
+    this.filterLocations(query)
   }
 
   filterLocations = (query) => {
-    console.log(query)
 
+      console.log(query)
 
     this.setState({ query })
   }
@@ -31,9 +31,9 @@ class TopSidebar extends Component {
           <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filterLocations(event.target.value) }}/>
         </div>
         <div className='show-locations'>
-          <ol className='list-museums'>
+          <ul className='list-museums'>
 
-          </ol>
+          </ul>
         </div>
 
       </div>
