@@ -8,7 +8,8 @@ import axios from 'axios'
 
 class App extends Component {
 
-  state = {localArts: []}
+  state = {localArts: []
+  }
 
 
   componentDidMount() {
@@ -36,24 +37,28 @@ class App extends Component {
             localArts: response.data.response.groups[0].items
           }, this.loadMap())
         })
+        .catch = (error) => {
+          console.log(error: 'Sorry, seems to be an error')
+        }
   }
 
   initMap = () =>{
     const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: 34.0556, lng: -117.1825},
+      center: {lat: 34.077503, lng: -117.221903},
       zoom: 13
     });
 
     const infowindow = new window.google.maps.InfoWindow()
 
-    this.state.localArts.map(art => {
-      const contentString = `${art.venue.name} ${art.venue.location.address}`
+    this.state.localArts.forEach(art => {
+      const contentString = `${art.venue.name}  ${art.venue.location.address}`
       const marker = new window.google.maps.Marker({
         position: {lat: art.venue.location.lat, lng: art.venue.location.lng},
         map: map,
         animation: window.google.maps.Animation.DROP,
         title: art.venue.name
       })
+
 
       marker.addListener('click', function() {
         infowindow.setContent(contentString)
@@ -67,7 +72,9 @@ class App extends Component {
       <div className="App">
         <Header />
         <div className='wide-view'>
-          <TopSidebar />
+          <TopSidebar
+            localArts={this.state.localArts}
+          />
           <MapDiv />
         </div>
       </div>
