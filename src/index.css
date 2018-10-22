@@ -48,6 +48,10 @@ h2.top-sidebar{
   margin-bottom: 0;
 }
 
+.show-locations {
+  overflow: auto;
+}
+
 .list-museums {
   font-size: 1.0em;
 }
@@ -63,7 +67,7 @@ div.drop-down {
 
 .see-options {
   width: 150px;
-  height: 36px;
+  height: 30px;
 }
 .far fa-times-circle{
   margin-right: 40px;
@@ -78,7 +82,7 @@ div.drop-down {
     display: block;
     position: absolute;
     z-index: 100;
-    width: 200px;
+    width: 250px;
     max-width: 75%;
     height: 100vh;
     margin: 0;
@@ -95,10 +99,10 @@ div.drop-down {
   }
 
   .list-museums {
-    font-size: 1.25em;
+    font-size: 1.0em;
   }
 
   .list-item {
-    margin-bottom: 15px;
+    margin-bottom: 0;
   }
 }

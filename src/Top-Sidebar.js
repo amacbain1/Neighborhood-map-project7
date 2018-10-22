@@ -12,6 +12,7 @@ class TopSidebar extends Component {
   }
 
 
+
   updateQuery = (query) => {
     this.setState({
       query: query
@@ -21,7 +22,7 @@ class TopSidebar extends Component {
 
   filterLocations = (query) => {
     this.props.localArts.forEach(marker => {
-  //    marker.name.toLowerCase().includes(quer//y.toLowerCase()) == true ?
+  //    marker.name.toLowerCase().includes(query.toLowerCase()) == true ?
   //      marker.setVisible(true) :
   //      marker.setVisible(false)
       //const marker = new window.google.maps.Marker
@@ -44,6 +45,7 @@ class TopSidebar extends Component {
 
 
   render(){
+
     let filterLocations = this.props.localArts.filter( (localArt) => {
       return localArt.venue.name.indexOf(this.state.query) !== -1
     })
@@ -57,11 +59,11 @@ class TopSidebar extends Component {
         <div className='show-locations'>
           {this.state.showLocations ? (
           <ul className='list-museums'>
-            {filterLocations.map(localArt => {
+            {this.props.localArts.map((localArt) => {
               return(
-                <li key={localArt.venue.id} className='list-item' >
+                <li key={localArt.venue.id} className='list-item'>
 
-                  {this.props.localArts.name}
+                 {localArt.venue.name}
 
                 </li>
               )
