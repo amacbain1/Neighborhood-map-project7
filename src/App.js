@@ -8,8 +8,12 @@ import axios from 'axios'
 
 class App extends Component {
 
-  state = {localArts: []
+  constructor(props) {
+    super(props)
+    this.state = {localArts: []
+    }
   }
+
 
 
   componentDidMount() {

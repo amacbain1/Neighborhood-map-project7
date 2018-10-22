@@ -8,6 +8,10 @@ html, body {
   padding: 0;
 }
 
+.wide-view {
+  max-width: 100%;
+}
+
 .lrg-text {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -43,6 +47,11 @@ h2.top-sidebar{
   width: 50%;
 }
 
+.list-museums {
+  font-size: 1.25em;
+  margin-bottom: 15px;
+}
+
 div.drop-down {
   width: 50%;
 }
@@ -50,7 +59,9 @@ div.drop-down {
 .see-options {
   width: 150px;
   height: 36px;
-
+}
+.fas fa-angle-up{
+  margin-right: 15px;
 }
 
 @media screen and (min-width: 600px) {
