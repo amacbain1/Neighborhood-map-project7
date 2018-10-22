@@ -20,17 +20,22 @@ class TopSidebar extends Component {
   }
 
   filterLocations = (query) => {
-    this.props.localArts.forEach(art => {
+    this.props.localArts.forEach(marker => {
+  //    marker.name.toLowerCase().includes(quer//y.toLowerCase()) == true ?
+  //      marker.setVisible(true) :
+  //      marker.setVisible(false)
       //const marker = new window.google.maps.Marker
       //if (!query.toLowerCase() === this.props.localArts.marker) {
     //     null
     //  }else{
     //    this.props.localArts.marker
     //  }
-      console.log(query)
+      console.log(marker)
+
 
     this.setState({ query })
-  })
+
+    })
   }
 
   showOnClick = e => {
@@ -39,21 +44,24 @@ class TopSidebar extends Component {
 
 
   render(){
+    let filterLocations = this.props.localArts.filter( (localArt) => {
+      return localArt.venue.name.indexOf(this.state.query) !== -1
+    })
       return(
       <div className='options'>
         <h2 className='top-sidebar'>Art and Theater</h2>
         <div className='drop-down'>
-            <i className='fas fa-angle-up' style= {{float: 'right'}} type='button' value='Hide options' onClick={this.showOnClick}/>
+          <i className='far fa-times-circle' style= {{padding: '15px' }} type='button' value='Hide options' onClick={this.showOnClick}/>
           <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filterLocations(event.target.value) }}/>
         </div>
         <div className='show-locations'>
           {this.state.showLocations ? (
           <ul className='list-museums'>
-            {this.props.localArts.map(localArts => {
+            {filterLocations.map(localArt => {
               return(
-                <li className='listItem' key={this.props.localArts.id}>
+                <li key={localArt.venue.id} className='list-item' >
 
-                    Museum Name {this.props.localArts.name}
+                  {this.props.localArts.name}
 
                 </li>
               )

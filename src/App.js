@@ -48,7 +48,7 @@ class App extends Component {
 
   initMap = () =>{
     const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: 34.077503, lng: -117.221903},
+      center: {lat: 34.059270, lng: -117.214530},
       zoom: 13
     });
 
@@ -62,7 +62,7 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP,
         title: art.venue.name
       })
-
+      
 
       marker.addListener('click', function() {
         infowindow.setContent(contentString)

@@ -45,11 +45,16 @@ h2.top-sidebar{
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5em;
   width: 50%;
+  margin-bottom: 0;
 }
 
 .list-museums {
-  font-size: 1.25em;
-  margin-bottom: 15px;
+  font-size: 1.0em;
+}
+
+.list-item {
+  float: left;
+  margin: 10px;
 }
 
 div.drop-down {
@@ -60,8 +65,8 @@ div.drop-down {
   width: 150px;
   height: 36px;
 }
-.fas fa-angle-up{
-  margin-right: 15px;
+.far fa-times-circle{
+  margin-right: 40px;
 }
 
 @media screen and (min-width: 600px) {
@@ -73,7 +78,7 @@ div.drop-down {
     display: block;
     position: absolute;
     z-index: 100;
-    width: 175px;
+    width: 200px;
     max-width: 75%;
     height: 100vh;
     margin: 0;
@@ -87,5 +92,13 @@ div.drop-down {
     width: 100%;
     height: 40px;
     padding-bottom: 20px;
+  }
+
+  .list-museums {
+    font-size: 1.25em;
+  }
+
+  .list-item {
+    margin-bottom: 15px;
   }
 }
