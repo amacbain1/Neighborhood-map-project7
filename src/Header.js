@@ -5,7 +5,7 @@ const Header = () => {
       return(
         <div className='header'>
           <h1 className='lrg-text'>
-            Points of Interest, Redlands CA
+            Art & Entertainment, Redlands CA
           </h1>
 
         </div>

@@ -10,7 +10,8 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {localArts: []
+    this.state = {localArts: [],
+      markers: []
     }
   }
 
@@ -62,7 +63,8 @@ class App extends Component {
         animation: window.google.maps.Animation.DROP,
         title: art.venue.name
       })
-      
+      this.state.markers.push(marker)
+
 
       marker.addListener('click', function() {
         infowindow.setContent(contentString)
@@ -78,6 +80,7 @@ class App extends Component {
         <div className='wide-view'>
           <TopSidebar
             localArts={this.state.localArts}
+            markers={this.state.markers}
           />
           <MapDiv />
         </div>

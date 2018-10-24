@@ -6,8 +6,8 @@ class TopSidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {query: '',
-      filterLocations: [],
-      showLocations: true
+    filterLocations: true,
+    showLocations: true
     }
   }
 
@@ -17,30 +17,27 @@ class TopSidebar extends Component {
     this.setState({
       query: query
     })
-    this.filterLocations(query)
+    this.filteredLocations(query)
   }
 
-  filterLocations = (query) => {
-  //  this.props.localArts.forEach(marker => {
-  //    marker.name.toLowerCase().includes(query.toLowerCase()) == true ?
-  //      marker.setVisible(true) :
-  //      marker.setVisible(false)
-      //const marker = new window.google.maps.Marker
-      //if (!query.toLowerCase() === this.props.localArts.marker) {
-    //     null
-    //  }else{
-    //    this.props.localArts.marker
-    //  }
-  //    console.log(marker)
-
+  filteredLocations = (query) => {
+    //Can toggle markers to false but not back to true
+    //markers remain visible on-screen
+    let markers = this.props.markers.filter((marker) =>{
+        if (marker.title.toLowerCase() === this.state.query.toLowerCase()) {
+          marker.visible = true
+        }else{
+          marker.visible = false
+        }
+    })
 
     this.setState({ query })
-
-  //  })
   }
+
 
   showOnClick = e => {
     this.setState({ showLocations: !this.state.showLocations })
+  //  this.setState({ filterLocations : !this.state.filterLocations })
   }
 
 
@@ -55,7 +52,7 @@ class TopSidebar extends Component {
         <div className='drop-down'>
 
           <i className='fas fa-arrow-alt-circle-up' style= {{padding: '15px' }} type='button' value='Hide options' onClick={this.showOnClick}/>
-          <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filterLocations(event.target.value) }}/>
+          <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value) }}/>
         </div>
 
         <div className='show-locations'>
