@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {localArts: [],
-      markers: []
+      markers: [],
     }
   }
 
@@ -56,7 +56,7 @@ class App extends Component {
     const infowindow = new window.google.maps.InfoWindow()
 
     this.state.localArts.forEach(art => {
-      const contentString = `${art.venue.name}  ${art.venue.location.address}`
+      const contentString = `<strong>${art.venue.name}</strong> <br>  ${art.venue.location.address}`
       const marker = new window.google.maps.Marker({
         position: {lat: art.venue.location.lat, lng: art.venue.location.lng},
         map: map,
@@ -70,6 +70,7 @@ class App extends Component {
         infowindow.setContent(contentString)
         infowindow.open(map, marker);
         });
+
     });
   }
 
@@ -82,7 +83,9 @@ class App extends Component {
             localArts={this.state.localArts}
             markers={this.state.markers}
           />
-          <MapDiv />
+          <MapDiv
+            markers={this.state.markers}
+          />
         </div>
       </div>
     );
