@@ -65,6 +65,14 @@ div.drop-down {
   width: 50%;
 }
 
+.fas fa-arrow-alt-circle-down  {
+  display: none;
+}
+
+.fas fa-arrow-alt-circle-up  {
+  visibility: visible;
+}
+
 .see-options {
   width: 150px;
   height: 30px;
@@ -91,6 +99,7 @@ div.drop-down {
   div.drop-down {
     width: 100%;
   }
+
 
   h2.top-sidebar{
     width: 100%;

@@ -6,11 +6,9 @@ class TopSidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {query: '',
-  //  filterLocations: true,
     showLocations: true
     }
   }
-
 
 
   updateQuery = (query) => {
@@ -18,39 +16,36 @@ class TopSidebar extends Component {
       query: query
     })
     this.filteredLocations(query)
-
   }
 
   filteredLocations = (query) => {
-
     this.setState({ query })
-    this.filterMarkers({ query })
-
+    this.filterMarkers()
   }
 
   filterMarkers = query => {
-    //let {infoWindow} = this.state
     let {markers} = this.props
-    let filteredMarkers = markers.filter(marker =>
-      marker.title.toLowerCase().includes(this.state.query.toLowerCase())
-    )
-      markers.forEach(marker => marker.setVisible(false))
-        filteredMarkers.forEach(marker => marker.setVisible(true)
-    )
-
-  }
-
-  liClick = e => {
     let animateMarker = window.google.maps.Animation.BOUNCE
-    console.log('click')
 
-
-
+    let filteredMarkers = markers.filter(marker =>
+      marker.title.toLowerCase().match(this.state.query.toLowerCase())
+      )
+      markers.forEach(marker => marker.setVisible(false))
+      filteredMarkers.forEach(marker =>
+        marker.setVisible(true)
+        //animateMarker
+    )
   }
 
+
+  toggleIcon = (icon) => {
+    const circleDown = <i className='fas fa-arrow-alt-circle-down'> </i>
+    this.setState({ showLocations: !this.state.showLocations })
+
+    //icon.toggle.circleDown
+  }
 
   showOnClick = e => {
-    this.setState({ showLocations: !this.state.showLocations })
     this.setState({ filterLocations : !this.state.filterLocations })
   }
 
@@ -66,9 +61,10 @@ class TopSidebar extends Component {
         <h2 className='top-sidebar'>Art and Theater</h2>
         <div className='drop-down'>
 
-          <i className='fas fa-arrow-alt-circle-up' style= {{padding: '15px', color: '#0B3C5D' }} type='button' value='Hide options' onClick={this.showOnClick} />
-          <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D' }} type='button' value='Show options' onClick={this.showOnClick} />
-          <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value) }}/>
+          <i className='fas fa-arrow-alt-circle-up' style= {{padding: '15px', color: '#0B3C5D' }} type='button' value='Hide options' onClick={this.toggleIcon} />
+          <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D', display: 'none' }} type='button' value='Show options' onClick={this.toggleIcon} />
+          <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value)
+          }}/>
         </div>
 
         <div className='show-locations'>
@@ -76,7 +72,11 @@ class TopSidebar extends Component {
           <ul className='list-museums'>
             {filterLocations.map((localArt) => {
               return(
-                <li key={localArt.venue.id} className='list-item' onClick={(event) => { this.liClick(event.target.value) }}>
+                <li key={localArt.venue.id} className='list-item' onClick = {(e) => {
+
+                    console.log('click')
+
+                  }}>
 
                  {localArt.venue.name}
 
