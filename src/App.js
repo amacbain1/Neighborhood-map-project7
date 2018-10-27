@@ -16,8 +16,6 @@ class App extends Component {
     }
   }
 
-
-
   componentDidMount() {
     this.getLocalArts()
   }
@@ -87,7 +85,7 @@ class App extends Component {
           <TopSidebar
             localArts={this.state.localArts}
             markers={this.state.markers}
-            showInfoWindow={this.state.showInfoWindow}
+            
           />
           <MapDiv
             markers={this.state.markers}

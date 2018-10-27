@@ -66,20 +66,15 @@ div.drop-down {
   width: 50%;
 }
 
-.fas fa-arrow-alt-circle-down  {
-  display: none;
+.fas fa-arrow-alt-circle-up  {
+  padding: 15px;
+  color: #0B3C5D;
 }
 
-.fas fa-arrow-alt-circle-up  {
-  visibility: visible;
-}
 
 .see-options {
   width: 150px;
   height: 30px;
-}
-.far fa-times-circle{
-  margin-right: 40px;
 }
 
 @media screen and (min-width: 600px) {
@@ -106,6 +101,10 @@ div.drop-down {
     width: 100%;
     height: 40px;
     padding-bottom: 20px;
+  }
+
+  .fas fa-arrow-alt-circle-up  {
+    display: none;
   }
 
   .list-museums {

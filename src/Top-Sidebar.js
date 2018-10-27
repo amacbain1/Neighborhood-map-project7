@@ -7,6 +7,7 @@ class TopSidebar extends Component {
     super(props)
     this.state = {query: '',
     showLocations: true,
+    filteredLocations: []
 
     }
   }
@@ -16,7 +17,8 @@ class TopSidebar extends Component {
     this.setState({
       query: query
     })
-    this.filteredLocations(query)
+    //this.filteredLocations(query)
+    this.setState({ filteredLocations: this.props.localArts})
   }
 
   filteredLocations = (query) => {
@@ -36,7 +38,9 @@ class TopSidebar extends Component {
   filterMarkers = query => {
   //  event.preventDefault()
     let {markers} = this.props
-
+    let filterLocations = this.props.localArts.filter(localArt =>
+       localArt.venue.name.toLowerCase().includes(this.state.query.toLowerCase())
+    )
 
     let filteredMarkers =  markers.filter(marker =>
      //return (marker.get('title').search(regex) > -1)}
@@ -46,6 +50,7 @@ class TopSidebar extends Component {
       filteredMarkers.forEach(marker =>
         marker.setVisible(true)
       )
+      this.setState({ filteredLocations: filterLocations })
     }
 
   toggleIcon = (icon) => {
@@ -62,10 +67,10 @@ class TopSidebar extends Component {
 
   render(){
 
-    let filterLocations = this.props.localArts.filter( (localArt) => {
-      return localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+  //  let filterLocations = this.props.localArts.filter( (localArt) => {
+  //    return //localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
 
-    })
+  //  })
       return(
       <div className='options'>
         <h2 className='top-sidebar'>Art and Theater</h2>
@@ -83,16 +88,18 @@ class TopSidebar extends Component {
         <div className='show-locations'>
           {this.state.showLocations ? (
           <ul className='list-museums'>
-            {filterLocations.map((localArt) => {
+            
+            {this.state.filteredLocations.map((localArt) => {
               return(
-                <li key={localArt.venue.id} className='list-item' onClick = {(e) => {
+                <li key={localArt.venue.id} className='list-item'
+                  onClick = {(e) => {
 
-                  //{ this.props.showInfoWindow: !this.props.showInfoWindow }
-                    console.log('click')
-                    //this.props({ showInfoWindow: true })
-                  }}>
-
-                 {localArt.venue.name}
+                      console.log('click')
+                      //{localArt.venue.name}
+                      //{localArt.venue.location.address}
+                      }}
+                   >
+                     {localArt.venue.name}
 
                 </li>
               )
