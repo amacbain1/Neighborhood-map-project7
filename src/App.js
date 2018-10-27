@@ -12,6 +12,7 @@ class App extends Component {
     super(props)
     this.state = {localArts: [],
       markers: [],
+      showInfoWindow: false
     }
   }
 
@@ -68,7 +69,11 @@ class App extends Component {
 
       marker.addListener('click', function() {
         infowindow.setContent(contentString)
-        infowindow.open(map, marker);
+        infowindow.open(map, marker)
+        marker.getAnimation() !== null ?
+          marker.setAnimation(null):
+          marker.setAnimation(window.google.maps.Animation.BOUNCE)
+          setTimeout(() => {marker.setAnimation(null)}, 1000)
         });
 
     });
@@ -82,6 +87,7 @@ class App extends Component {
           <TopSidebar
             localArts={this.state.localArts}
             markers={this.state.markers}
+            showInfoWindow={this.state.showInfoWindow}
           />
           <MapDiv
             markers={this.state.markers}

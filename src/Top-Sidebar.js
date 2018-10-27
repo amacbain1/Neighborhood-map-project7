@@ -6,7 +6,8 @@ class TopSidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {query: '',
-    showLocations: true
+    showLocations: true,
+
     }
   }
 
@@ -23,20 +24,29 @@ class TopSidebar extends Component {
     this.filterMarkers()
   }
 
-  filterMarkers = query => {
-    let {markers} = this.props
-    let animateMarker = window.google.maps.Animation.BOUNCE
 
-    let filteredMarkers = markers.filter(marker =>
-      marker.title.toLowerCase().match(this.state.query.toLowerCase())
-      )
+//  filterMarkers(event) {
+      //event.preventDefault();
+//      const regex = new RegExp(event.target.value, 'i');
+//      const Markers = this.props.marker.filter(function(marker) {
+//        return (Markers.get('title').search(regex) > -1);
+//      });
+
+
+  filterMarkers = query => {
+  //  event.preventDefault()
+    let {markers} = this.props
+
+
+    let filteredMarkers =  markers.filter(marker =>
+     //return (marker.get('title').search(regex) > -1)}
+     marker.title.toLowerCase().match(this.state.query.toLowerCase())
+    )
       markers.forEach(marker => marker.setVisible(false))
       filteredMarkers.forEach(marker =>
         marker.setVisible(true)
-        //animateMarker
-    )
-  }
-
+      )
+    }
 
   toggleIcon = (icon) => {
     const circleDown = <i className='fas fa-arrow-alt-circle-down'> </i>
@@ -62,9 +72,12 @@ class TopSidebar extends Component {
         <div className='drop-down'>
 
           <i className='fas fa-arrow-alt-circle-up' style= {{padding: '15px', color: '#0B3C5D' }} type='button' value='Hide options' onClick={this.toggleIcon} />
+
           <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D', display: 'none' }} type='button' value='Show options' onClick={this.toggleIcon} />
+
           <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value)
           }}/>
+
         </div>
 
         <div className='show-locations'>
@@ -74,8 +87,9 @@ class TopSidebar extends Component {
               return(
                 <li key={localArt.venue.id} className='list-item' onClick = {(e) => {
 
+                  //{ this.props.showInfoWindow: !this.props.showInfoWindow }
                     console.log('click')
-
+                    //this.props({ showInfoWindow: true })
                   }}>
 
                  {localArt.venue.name}
