@@ -8,6 +8,10 @@ html, body {
   padding: 0;
 }
 
+a:focus{
+	outline: 3px solid #orange;
+}
+
 .wide-view {
   max-width: 100%;
 }
@@ -57,7 +61,6 @@ h2.top-sidebar{
 }
 
 .list-item {
-  float: left;
   margin: 10px;
   cursor: pointer;
 }

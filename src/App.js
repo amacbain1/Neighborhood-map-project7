@@ -34,6 +34,7 @@ class App extends Component {
         section: 'arts',
         near: 'Redlands, CA',
         limit: 10
+
       }
       axios.get(endPoint + new URLSearchParams(parameters))
         .then(response => {
@@ -50,6 +51,7 @@ class App extends Component {
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 34.059270, lng: -117.214530},
       zoom: 13
+
     });
 
     const infowindow = new window.google.maps.InfoWindow()
@@ -65,17 +67,31 @@ class App extends Component {
       this.state.markers.push(marker)
 
 
-      marker.addListener('click', function() {
-        infowindow.setContent(contentString)
-        infowindow.open(map, marker)
-        marker.getAnimation() !== null ?
-          marker.setAnimation(null):
-          marker.setAnimation(window.google.maps.Animation.BOUNCE)
-          setTimeout(() => {marker.setAnimation(null)}, 1000)
-        });
+        marker.addListener('click', function() {
+
+          infowindow.setContent(contentString)
+          infowindow.open(map, marker)
+          marker.getAnimation() !== null ?
+            marker.setAnimation(null):
+            marker.setAnimation(window.google.maps.Animation.BOUNCE)
+            setTimeout(() => {marker.setAnimation(null)}, 1000)
+          });
+          this.setState.showInfoWindow = false
+
+
 
     });
   }
+
+
+  listItemClick = art => {
+  //  const localArt = this.state.localArts.map(localArt)
+  //const marker = this.state.markers.filter(marker => marker.title.toLowerCase() === this.state.localArts.filter((art) => art.venue.name.toLowerCase()))
+    this.setState.showInfoWindow= true
+  //  this.marker.infoWindow.open(marker)
+    console.log('click')
+  }
+
 
   render() {
     return (
@@ -85,7 +101,8 @@ class App extends Component {
           <TopSidebar
             localArts={this.state.localArts}
             markers={this.state.markers}
-            
+            listItemClick={this.listItemClick}
+
           />
           <MapDiv
             markers={this.state.markers}
@@ -105,3 +122,5 @@ function getScriptURL(url) {
   index.parentNode.insertBefore(scriptKey, index)
 }
 export default App;
+//LevelUp Tuts=Building a Search Function
+//Ryan Waite=Coding Session YouTube

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 
 class TopSidebar extends Component {
-
   constructor(props) {
     super(props)
     this.state = {query: '',
@@ -17,13 +16,15 @@ class TopSidebar extends Component {
     this.setState({
       query: query
     })
+
     //this.filteredLocations(query)
-    this.setState({ filteredLocations: this.props.localArts})
+    //this.setState({ filteredLocations: query })
   }
 
   filteredLocations = (query) => {
+
     this.setState({ query })
-    this.filterMarkers()
+    this.filterMarkers({ query })
   }
 
 
@@ -37,21 +38,35 @@ class TopSidebar extends Component {
 
   filterMarkers = query => {
   //  event.preventDefault()
-    let {markers} = this.props
+  let {localArts, markers} = this.props
+
+//  let filterLocations = localArts.filter(localArt => {
+//  return localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+//  })
+
+
     let filterLocations = this.props.localArts.filter(localArt =>
-       localArt.venue.name.toLowerCase().includes(this.state.query.toLowerCase())
+       localArt.venue.name.toLowerCase().match(this.state.query.toLowerCase())
     )
+    this.setState ({ filteredLocations: filterLocations })
 
     let filteredMarkers =  markers.filter(marker =>
      //return (marker.get('title').search(regex) > -1)}
-     marker.title.toLowerCase().match(this.state.query.toLowerCase())
-    )
+     marker.title.toLowerCase().match(this.state.query.toLowerCase()))
+
       markers.forEach(marker => marker.setVisible(false))
       filteredMarkers.forEach(marker =>
         marker.setVisible(true)
       )
-      this.setState({ filteredLocations: filterLocations })
-    }
+    //  this.setState({ filteredLocations: filterLocations })
+
+  }
+
+
+
+
+
+
 
   toggleIcon = (icon) => {
     const circleDown = <i className='fas fa-arrow-alt-circle-down'> </i>
@@ -66,11 +81,14 @@ class TopSidebar extends Component {
 
 
   render(){
+    let {localArts, markers} = this.props
 
-  //  let filterLocations = this.props.localArts.filter( (localArt) => {
-  //    return //localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+    let filterLocations = localArts.filter( (localArt) => {
+      return   localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
 
-  //  })
+    })
+
+
       return(
       <div className='options'>
         <h2 className='top-sidebar'>Art and Theater</h2>
@@ -80,34 +98,35 @@ class TopSidebar extends Component {
 
           <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D', display: 'none' }} type='button' value='Show options' onClick={this.toggleIcon} />
 
-          <input className='see-options' type='text' placeholder='Search' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value)
-          }}/>
+          <input className='see-options' type='text' placeholder='Filter Results' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value)
+            //this.filteredMarkers()
+           }}/>
 
         </div>
 
         <div className='show-locations'>
-          {this.state.showLocations ? (
-          <ul className='list-museums'>
-            
-            {this.state.filteredLocations.map((localArt) => {
-              return(
-                <li key={localArt.venue.id} className='list-item'
-                  onClick = {(e) => {
 
-                      console.log('click')
-                      //{localArt.venue.name}
-                      //{localArt.venue.location.address}
-                      }}
-                   >
+          {this.state.showLocations ? (
+
+              <ul className='list-museums'>
+
+            {filterLocations.map((localArt) => {
+            return(
+
+                <li key={localArt.venue.id} className='list-item'
+                    onClick={() => this.props.listItemClick(localArt.venue.name)} >
                      {localArt.venue.name}
 
                 </li>
-              )
 
-            })
-          }
-          </ul>
-        ) : null}
+            )
+            })}
+
+            </ul>
+
+        ) : null
+      }
+
         </div>
 
       </div>
