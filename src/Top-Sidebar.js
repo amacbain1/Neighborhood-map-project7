@@ -92,9 +92,9 @@ class TopSidebar extends Component {
       return(
       <div className='options'>
         <h2 className='top-sidebar'>Art and Theater</h2>
-        <div className='drop-down'>
+        <nav className='drop-down-filter' role='navigation'>
 
-          <i className='fas fa-arrow-alt-circle-up' style= {{padding: '15px', color: '#0B3C5D' }} type='button' value='Hide options' onClick={this.toggleIcon} />
+          <i className='fas fa-arrow-alt-circle-up' style= {{padding: '15px', color: '#0B3C5D' }} type='button' role='button' tab-index='0' value='Hide options' onClick={this.toggleIcon} />
 
           <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D', display: 'none' }} type='button' value='Show options' onClick={this.toggleIcon} />
 
@@ -102,7 +102,7 @@ class TopSidebar extends Component {
             //this.filteredMarkers()
            }}/>
 
-        </div>
+        </nav>
 
         <div className='show-locations'>
 

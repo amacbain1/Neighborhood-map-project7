@@ -33,7 +33,7 @@ class App extends Component {
         v: '20181015',
         section: 'arts',
         near: 'Redlands, CA',
-        limit: 10
+        limit: 13
 
       }
       axios.get(endPoint + new URLSearchParams(parameters))
@@ -90,6 +90,7 @@ class App extends Component {
     this.setState.showInfoWindow= true
   //  this.marker.infoWindow.open(marker)
     console.log('click')
+    
   }
 
 
