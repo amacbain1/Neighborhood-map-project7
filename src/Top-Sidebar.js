@@ -93,11 +93,11 @@ class TopSidebar extends Component {
       <div className='options'>
         <h2 className='top-sidebar'>Art and Theater</h2>
         <nav className='drop-down-filter' role='navigation'>
+          <button className='button'>
+            <i className='fas fa-arrow-alt-circle-up' tab-index='0' style= {{ color: '#0B3C5D', cursor: 'pointer' }} type='button' role='button'  value='Hide options' onClick={this.toggleIcon} />
 
-          <i className='fas fa-arrow-alt-circle-up' style= {{padding: '15px', color: '#0B3C5D' }} type='button' role='button' tab-index='0' value='Hide options' onClick={this.toggleIcon} />
-
-          <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D', display: 'none' }} type='button' value='Show options' onClick={this.toggleIcon} />
-
+            <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D', display: 'none' }} type='button' value='Show options' onClick={this.toggleIcon} />
+          </button>
           <input className='see-options' type='text' placeholder='Filter Results' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value)
             //this.filteredMarkers()
            }}/>

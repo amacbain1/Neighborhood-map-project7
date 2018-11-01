@@ -86,11 +86,11 @@ class App extends Component {
 
   listItemClick = art => {
   //  const localArt = this.state.localArts.map(localArt)
-  //const marker = this.state.markers.filter(marker => marker.title.toLowerCase() === this.state.localArts.filter((art) => art.venue.name.toLowerCase()))
-    this.setState.showInfoWindow= true
-  //  this.marker.infoWindow.open(marker)
-    console.log('click')
-    
+    const marker = this.state.markers.filter(marker => marker.title.toLowerCase() === this.state.localArts.filter((art) => art.venue.name.toLowerCase()))
+    //this.setState.showInfoWindow= true
+    //this.marker.InfoWindow.open(marker)
+    console.log(marker)
+
   }
 
 

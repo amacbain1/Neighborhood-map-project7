@@ -8,7 +8,7 @@ html, body {
   padding: 0;
 }
 
-a:focus, a:hover {
+focus, hover {
 	outline: 3px solid #orange;
 }
 
@@ -69,8 +69,15 @@ h2.top-sidebar{
   width: 50%;
 }
 
+.button {
+  margin-right: 10px;
+  height: 40px;
+  width: 40px;
+  font-size: 1.3em;
+}
+
 .fas fa-arrow-alt-circle-up  {
-  padding: 15px;
+  margin-right: 15px;
   color: #0B3C5D;
 }
 

@@ -13,9 +13,9 @@ This is a React App using Google Maps and Foursquare to find local theater and m
 
 ## Instructions
 
-To run this application, install npm on your local machine via [NodeJS](https://nodejs.org/en/). Clone the project [here](https://github.com/amacbain1/Neighborhood-map-project7).
+To run this application, install npm on your local machine via [NodeJS](https://nodejs.org/en/). Clone the project to your machine [here](https://github.com/amacbain1/Neighborhood-map-project7).
 Begin the installation with the command `npm install` in your command line after navigating
-to the correct directory. To start the development server, cd into the project and use the command `npm start`. The application will run in your browser on localhost:3000.
+to the correct directory in your local files. To start the development server use the command `npm start`. The application will run in your browser at the address http://localhost:3000/.
 
 *Please note that Service Worker is unavailable in build mode. To use Service Worker use the command `npm run build` to enter production mode.*
 
