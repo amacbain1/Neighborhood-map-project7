@@ -10,8 +10,10 @@ class App extends Component {
 
   constructor(props) {
     super(props)
+    this.markers = null
     this.state = {localArts: [],
       markers: [],
+      map: null,
       showInfoWindow: false
     }
   }
@@ -21,7 +23,7 @@ class App extends Component {
   }
 
   loadMap = () => {
-    getScriptURL('https://maps.googleapis.com/maps/api/js?key=AIzaSyDD6Pih0tlHoxYUN9YIL4aLSvAvZMoLknM&v=3&callback=initMap')
+    getScriptURL('https://maps.googleapis.com/maps/api/js?client=gme-nianticinc&v=weekly&libraries=geometry,drawing,places&callback=initMap')
       window.initMap = this.initMap
   }
 
@@ -43,7 +45,7 @@ class App extends Component {
           }, this.loadMap())
         })
         .catch = (error) => {
-          console.log(error: 'Sorry, seems to be an error')
+          console.log(error + ': Sorry, there seems to be an error')
         }
   }
 
@@ -56,16 +58,16 @@ class App extends Component {
 
     const infowindow = new window.google.maps.InfoWindow()
 
-    this.state.localArts.forEach(art => {
-      const contentString = `<strong>${art.venue.name}</strong> <br>  ${art.venue.location.address}`
-      const marker = new window.google.maps.Marker({
+    let markers = this.state.localArts.map(art => {
+      let contentString = `<strong>${art.venue.name}</strong> <br>  ${art.venue.location.address}`
+      let marker = new window.google.maps.Marker({
         position: {lat: art.venue.location.lat, lng: art.venue.location.lng},
         map: map,
         animation: window.google.maps.Animation.DROP,
         title: art.venue.name
       })
-      this.state.markers.push(marker)
-
+      //Markers[] was empty--pushing into
+      //this.state.markers.push(marker)
 
         marker.addListener('click', function() {
 
@@ -75,21 +77,31 @@ class App extends Component {
             marker.setAnimation(null):
             marker.setAnimation(window.google.maps.Animation.BOUNCE)
             setTimeout(() => {marker.setAnimation(null)}, 1000)
+
           });
+
           this.setState.showInfoWindow = false
+          return marker
 
-
-
+            //const marker = this.state.markers.filter(marker => marker.position === this.state.localArts.filter((art) => art.venue.labeledLatLng))
+          //  this.setState.showInfoWindow = true
     });
+    this.setState({
+      markers: markers,
+      map: map
+    })
+
+    window.myMarkers = this.state.markers;
+    window.myMap = map;
   }
 
 
   listItemClick = art => {
-  //  const localArt = this.state.localArts.map(localArt)
-    const marker = this.state.markers.filter(marker => marker.title.toLowerCase() === this.state.localArts.filter((art) => art.venue.name.toLowerCase()))
-    //this.setState.showInfoWindow= true
+  //  const marker = this.state.markers.filter(marker => marker.map.title === //this.state.localArts.filter((art) => art.venue.name))
+
+  //  this.setState.showInfoWindow= true
     //this.marker.InfoWindow.open(marker)
-    console.log(marker)
+    console.log(art)
 
   }
 
@@ -103,8 +115,7 @@ class App extends Component {
             localArts={this.state.localArts}
             markers={this.state.markers}
             listItemClick={this.listItemClick}
-
-          />
+            map={this.state.map}          />
           <MapDiv
             markers={this.state.markers}
           />

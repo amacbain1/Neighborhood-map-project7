@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 class TopSidebar extends Component {
   constructor(props) {
     super(props)
-    this.state = {query: '',
-    showLocations: true,
-    filteredLocations: []
+    this.state = {
+      query: '',
+      showLocations: true,
+      filteredLocations: []
 
     }
   }
@@ -24,7 +25,11 @@ class TopSidebar extends Component {
   filteredLocations = (query) => {
 
     this.setState({ query })
-    this.filterMarkers({ query })
+    this.props.markers.forEach(marker => marker.setMap(null))
+    console.log(this.props.markers)
+
+    this.filterMarkers(query)
+    console.log(this.props.map)
   }
 
 
@@ -38,26 +43,20 @@ class TopSidebar extends Component {
 
   filterMarkers = query => {
   //  event.preventDefault()
-  let {localArts, markers} = this.props
+    let {localArts, markers, map} = this.props
 
 //  let filterLocations = localArts.filter(localArt => {
 //  return localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
 //  })
+    markers.forEach(location => {
+      console.log(query)
 
 
-    let filterLocations = this.props.localArts.filter(localArt =>
-       localArt.venue.name.toLowerCase().match(this.state.query.toLowerCase())
-    )
-    this.setState ({ filteredLocations: filterLocations })
-
-    let filteredMarkers =  markers.filter(marker =>
-     //return (marker.get('title').search(regex) > -1)}
-     marker.title.toLowerCase().match(this.state.query.toLowerCase()))
-
-      markers.forEach(marker => marker.setVisible(false))
-      filteredMarkers.forEach(marker =>
-        marker.setVisible(true)
-      )
+      if(location.title.toLowerCase().match(query) !== null) {
+        location.setMap(this.props.map)
+        console.log(location.title)
+      }
+    })
     //  this.setState({ filteredLocations: filterLocations })
 
   }
@@ -82,8 +81,8 @@ class TopSidebar extends Component {
 
   render(){
     let {localArts, markers} = this.props
-
-    let filterLocations = localArts.filter( (localArt) => {
+    //what's this?
+    let filterLocations = localArts.filter((localArt) => {
       return   localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
 
     })
@@ -110,17 +109,17 @@ class TopSidebar extends Component {
 
               <ul className='list-museums'>
 
-            {filterLocations.map((localArt) => {
-            return(
+                {filterLocations.map((localArt) => {
+                return(
 
-                <li key={localArt.venue.id} className='list-item'
-                    onClick={() => this.props.listItemClick(localArt.venue.name)} >
-                     {localArt.venue.name}
+                    <li key={localArt.venue.id} className='list-item'
+                        onClick={() => this.props.listItemClick(localArt.venue.name)} >
+                         {localArt.venue.name}
 
-                </li>
+                    </li>
 
-            )
-            })}
+                )
+                })}
 
             </ul>
 
