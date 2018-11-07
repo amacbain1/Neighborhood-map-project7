@@ -1,136 +1,126 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 
 class TopSidebar extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      query: '',
-      showLocations: true,
-      filteredLocations: []
+    constructor(props) {
+        super(props)
+        this.state = {
+            query: '',
+            showLocations: true,
+            filteredLocations: []
 
+        }
     }
-  }
 
 
-  updateQuery = (query) => {
-    this.setState({
-      query: query
-    })
+    updateQuery = (query) => {
+        this.setState({
+            query: query
+        })
 
-    //this.filteredLocations(query)
-    //this.setState({ filteredLocations: query })
-  }
+        //this.filteredLocations(query)
+        //this.setState({ filteredLocations: query })
+    }
 
-  filteredLocations = (query) => {
+    filteredLocations = (query) => {
 
-    this.setState({ query })
-    this.props.markers.forEach(marker => marker.setMap(null))
-    console.log(this.props.markers)
+        this.setState({query})
 
-    this.filterMarkers(query)
-    console.log(this.props.map)
-  }
+        // clear all markers
+        this.props.markers.forEach(marker => marker.setMap(null));
+        console.log('markers cleared');
 
-
-//  filterMarkers(event) {
-      //event.preventDefault();
-//      const regex = new RegExp(event.target.value, 'i');
-//      const Markers = this.props.marker.filter(function(marker) {
-//        return (Markers.get('title').search(regex) > -1);
-//      });
-
-
-  filterMarkers = query => {
-  //  event.preventDefault()
-    let {localArts, markers, map} = this.props
-
-//  let filterLocations = localArts.filter(localArt => {
-//  return localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
-//  })
-    markers.forEach(location => {
-      console.log(query)
-
-
-      if(location.title.toLowerCase().match(query) !== null) {
-        location.setMap(this.props.map)
-        console.log(location.title)
-      }
-    })
-    //  this.setState({ filteredLocations: filterLocations })
-
-  }
+        this.filterMarkers(query);
+        console.log(this.props.map);
+    };
 
 
 
+    filterMarkers = query => {
+        //  event.preventDefault()
+        let {localArts, markers, map} = this.props;
+
+        markers.forEach(location => {
+            console.log(query);
+
+            if (location.title.toLowerCase().match(query) !== null) {
+                location.setMap(this.props.map);
+                console.log(location.title);
+            }
+        });
+    }
 
 
+    toggleIcon = (icon) => {
+        const circleDown = <i className='fas fa-arrow-alt-circle-down'> </i>
+        this.setState({showLocations: !this.state.showLocations})
+
+        //icon.toggle.circleDown
+    }
+
+    showOnClick = e => {
+        this.setState({filterLocations: !this.state.filterLocations})
+    }
 
 
-  toggleIcon = (icon) => {
-    const circleDown = <i className='fas fa-arrow-alt-circle-down'> </i>
-    this.setState({ showLocations: !this.state.showLocations })
+    render() {
+        let {localArts, markers} = this.props
+        window.testMe = this.props;
+        let filterLocations = localArts.filter((localArt) => {
+            return localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
 
-    //icon.toggle.circleDown
-  }
-
-  showOnClick = e => {
-    this.setState({ filterLocations : !this.state.filterLocations })
-  }
+        })
 
 
-  render(){
-    let {localArts, markers} = this.props
-    //what's this?
-    let filterLocations = localArts.filter((localArt) => {
-      return   localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+        return (
+            <div className='options'>
+                <h2 className='top-sidebar'>Art and Theater</h2>
+                <nav className='drop-down-filter' role='navigation'>
+                    <button className='button'>
+                        <i className='fas fa-arrow-alt-circle-up' tab-index='0'
+                           style={{color: '#0B3C5D', cursor: 'pointer'}} type='button' role='button'
+                           value='Hide options' onClick={this.toggleIcon}/>
 
-    })
+                        <i className='fas fa-arrow-alt-circle-down'
+                           style={{color: '#0B3C5D'}} type='button'
+                           value='Show options' onClick={this.toggleIcon}/>
+                    </button>
+                    <input className='see-options' type='text' placeholder='Filter Results' value={this.state.query}
+                           onChange={(event) => {
+                               this.filteredLocations(event.target.value)
+                               //this.filteredMarkers()
+                           }}/>
 
+                </nav>
 
-      return(
-      <div className='options'>
-        <h2 className='top-sidebar'>Art and Theater</h2>
-        <nav className='drop-down-filter' role='navigation'>
-          <button className='button'>
-            <i className='fas fa-arrow-alt-circle-up' tab-index='0' style= {{ color: '#0B3C5D', cursor: 'pointer' }} type='button' role='button'  value='Hide options' onClick={this.toggleIcon} />
+                <div className='show-locations'>
 
-            <i className='fas fa-arrow-alt-circle-down' style= {{padding: '15px', color: '#0B3C5D', display: 'none' }} type='button' value='Show options' onClick={this.toggleIcon} />
-          </button>
-          <input className='see-options' type='text' placeholder='Filter Results' value={this.state.query} onChange={(event) => { this.filteredLocations(event.target.value)
-            //this.filteredMarkers()
-           }}/>
+                    {this.state.showLocations ? (
 
-        </nav>
+                        <ul className='list-museums'>
 
-        <div className='show-locations'>
+                            {filterLocations.map((localArt) => {
+                                return (
 
-          {this.state.showLocations ? (
+                                    <li key={localArt.venue.id} className='list-item'
+                                        onClick={() => this.props.listItemClick(localArt.venue.name)}>
+                                        {localArt.venue.name}
 
-              <ul className='list-museums'>
+                                    </li>
 
-                {filterLocations.map((localArt) => {
-                return(
+                                )
+                            })}
 
-                    <li key={localArt.venue.id} className='list-item'
-                        onClick={() => this.props.listItemClick(localArt.venue.name)} >
-                         {localArt.venue.name}
+                        </ul>
 
-                    </li>
+                    ) : null
+                    }
 
-                )
-                })}
+                </div>
 
-            </ul>
-
-        ) : null
-      }
-
-        </div>
-
-      </div>
-      );
-  }
+            </div>
+        );
+    }
 }
 
 export default TopSidebar;
