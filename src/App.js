@@ -5,6 +5,14 @@ import MapDiv from './MapDiv'
 import './index.css'
 import axios from 'axios'
 
+//******Attrubution and kindly offered assisstance******
+//Neighborhood Map by Yahya Elharony, YouTube
+//LevelUp Tuts=Building a Search Function, YouTube
+//Ryan Waite=Coding Session, YouTube
+//Google @ https://developers.google.com/maps/documentation/javascript/tutorial
+//Neighborhood Map by Forreest Walker, YouTube
+// Kind assistance and guidance from @Lloan Alas, student mentor
+
 
 class App extends Component {
 
@@ -47,7 +55,7 @@ class App extends Component {
                 }, this.loadMap())
             })
             .catch = (error) => {
-            console.log(error + ': Sorry, seems to be an error')
+            console.log(error + ': Sorry, there seems to be an error')
         }
     }
 
@@ -63,7 +71,7 @@ class App extends Component {
         const infowindow = new window.google.maps.InfoWindow()
 
         let markers = this.state.localArts.map(art => {
-            let contentString = `<div role='dialog' type='modal'><h4><strong>${art.venue.name}</strong></h4> <br>  <p>${art.venue.location.address}</p></div>`
+            let contentString = `<div role='dialog' aria-labelledby='dialog-title' type='modal'><h4><strong>${art.venue.name}</strong></h4> <br>  <p>${art.venue.location.address}</p></div>`
             let marker = new window.google.maps.Marker({
                 position: {lat: art.venue.location.lat, lng: art.venue.location.lng},
                 map: map,
@@ -125,7 +133,6 @@ class App extends Component {
                         markers={this.state.markers}
                         listItemClick={this.listItemClick}
                         map={this.state.map}
-
                     />
                     <MapDiv
                         markers={this.state.markers}
@@ -146,5 +153,3 @@ function getScriptURL(url) {
 }
 
 export default App;
-//LevelUp Tuts=Building a Search Function
-//Ryan Waite=Coding Session YouTube

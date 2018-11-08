@@ -23,3 +23,12 @@ to the correct directory in your local files. To start the development server us
 ## Dependencies
 
 This app is built using Create-React-App. Dependencies include Google Maps API, Foursquare API and FontAwesome.
+
+******Attrubution and kindly offered assisstance came from the following sources******
+Neighborhood Map by Yahya Elharony, YouTube
+LevelUp Tuts-Building a Search Function, YouTube
+Ryan Waite-Coding Session, YouTube
+Google @ https://developers.google.com/maps/documentation/javascript/tutorial
+Neighborhood Map by Forreest Walker, YouTube
+
+ Kind assistance and guidance from @Lloan Alas, student mentor

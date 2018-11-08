@@ -103,7 +103,7 @@ class TopSidebar extends Component {
                     }
 
                 </div>
-
+                <h6>Location information sourced via Foursquare</h6>
             </div>
         );
     }
