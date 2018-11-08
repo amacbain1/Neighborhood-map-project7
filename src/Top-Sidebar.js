@@ -19,16 +19,17 @@ class TopSidebar extends Component {
         })
     }
 
+//Filtered by search input
     filteredLocations = (query) => {
         this.setState({query})
 
-        // clear all markers
+// Clear all markers
         this.props.markers.forEach(marker => marker.setMap(null));
         this.filterMarkers(query);
     };
 
 
-
+//Markers filtered by search input
     filterMarkers = query => {
       let {markers, map} = this.props;
 
@@ -69,7 +70,7 @@ class TopSidebar extends Component {
                            value='Hide options' onClick={this.toggleIcon}/>
 
                         <i className='fas fa-arrow-alt-circle-down'
-                           style={{color: '#0B3C5D'}} type='button'
+                           style={{color: '#0B3C5D', cursor: 'pointer'}} type='button'
                            value='Show options' onClick={this.toggleIcon}/>
                     </button>
                     <input className='see-options' type='text' placeholder='Filter Results' value={this.state.query}
@@ -100,7 +101,7 @@ class TopSidebar extends Component {
                         </ul>
 
                     ) : null
-                    }
+                  }
 
                 </div>
                 <h6>Location information sourced via Foursquare</h6>

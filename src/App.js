@@ -37,6 +37,7 @@ class App extends Component {
         window.initMap = this.initMap
     }
 
+//Retrieve locations from Foursquare
     getLocalArts = () => {
         const endPoint = 'https://api.foursquare.com/v2/venues/explore?'
         const parameters = {
@@ -78,7 +79,7 @@ class App extends Component {
                 animation: window.google.maps.Animation.DROP,
                 title: art.venue.name
             });
-
+//Tie infowindow to markers
             marker.contentString = () => {
 
                 infowindow.setContent(contentString)
@@ -109,7 +110,7 @@ class App extends Component {
         window.myMap = map;
     };
 
-
+//Click event in sidebar
     listItemClick =  (location) => {
         this.state.markers.forEach(marker => {
             if (marker.title.toLowerCase() === location.toLowerCase()){
@@ -143,6 +144,7 @@ class App extends Component {
     }
 }
 
+//A-sync behavior retrieving map
 function getScriptURL(url) {
     const index = window.document.getElementsByTagName('script')[0]
     const scriptKey = window.document.createElement('script')
