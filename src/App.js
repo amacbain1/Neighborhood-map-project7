@@ -100,17 +100,14 @@ class App extends Component {
 
     listItemClick =  (art, listItemClick) => {
       let marker = this.state.markers.map(marker => {
-        //this.infowindow = new window.google.maps.InfoWindow({
-        // content: 'hi there!'
         return marker.title.toLowerCase()
-
           });
 
         this.state.localArts.forEach(art => {
-
           if (art.venue.name.toLowerCase().match(marker)) {
             //  art.setMap(this.props.map);
-
+            //this.infowindow = new window.google.maps.InfoWindow({
+            // content: 'hi there!'
               console.log(marker.title);
           }else {
             console.log('nope')
