@@ -12,10 +12,10 @@ class App extends Component {
         super(props);
         this.markers = null;
         this.state = {
+            infowindow: null,
             localArts: [],
             markers: [],
             map: null,
-            //showInfoWindow: false
         }
     }
 
@@ -71,7 +71,7 @@ class App extends Component {
                 title: art.venue.name
             });
 
-            marker.addListener('click', function () {
+            marker.contentString = () => {
 
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker)
@@ -81,16 +81,20 @@ class App extends Component {
                 setTimeout(() => {
                     marker.setAnimation(null)
                 }, 1000)
+              }
+
+              marker.addListener('click', function () {
+                marker.contentString();
             });
 
-            this.setState.showInfoWindow = false
             return marker;
 
         });
 
         this.setState({
             markers: markers,
-            map: map
+            map: map,
+            InfoWindow: infowindow
         })
 
         window.myMarkers = markers;
@@ -98,36 +102,15 @@ class App extends Component {
     };
 
 
-    listItemClick =  (art, listItemClick) => {
-      let marker = this.state.markers.map(marker => {
-        return marker.title.toLowerCase()
+    listItemClick =  (location) => {
+        this.state.markers.forEach(marker => {
+            if (marker.title.toLowerCase() === location.toLowerCase()){
+                marker.contentString();
+            } else {
+              return null
+            }
           });
-
-        this.state.localArts.forEach(art => {
-          if (art.venue.name.toLowerCase().match(marker)) {
-            //  art.setMap(this.props.map);
-            //this.infowindow = new window.google.maps.InfoWindow({
-            // content: 'hi there!'
-              console.log(marker.title);
-          }else {
-            console.log('nope')
-          }
-        })
-          //marker.addListener('click', function() {
-          //  this.infowindow.open(marker.get('map'), marker);
-          //});
-
-        //})
-
-
-        //  const localArt = this.state.localArts.map(localArt)
-        // let localArt = art;
-        // let markers = this.state.markers.filter(marker => {return art.toLowerCase() !== marker.title.toLowerCase() ? marker.setMap(null) : marker} );
-        //this.setState.showInfoWindow= true
-        //this.marker.InfoWindow.open(marker)
-      //  console.log('listItemClick');
-
-    };
+    }
 
 
 

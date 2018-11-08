@@ -7,7 +7,6 @@ const Header = () => {
           <h1 className='lrg-text'>
             Art & Entertainment, Redlands CA
           </h1>
-
         </div>
       );
 }

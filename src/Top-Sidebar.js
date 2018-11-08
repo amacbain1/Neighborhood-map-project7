@@ -17,45 +17,33 @@ class TopSidebar extends Component {
         this.setState({
             query: query
         })
-
-        //this.filteredLocations(query)
-        //this.setState({ filteredLocations: query })
     }
 
     filteredLocations = (query) => {
-
         this.setState({query})
 
         // clear all markers
         this.props.markers.forEach(marker => marker.setMap(null));
-        console.log('markers cleared');
-
         this.filterMarkers(query);
-        console.log(this.props.map);
     };
 
 
 
     filterMarkers = query => {
-        //  event.preventDefault()
-        let {localArts, markers, map} = this.props;
+      let {markers, map} = this.props;
 
-        markers.forEach(location => {
-            console.log(query);
-
-            if (location.title.toLowerCase().match(query) !== null) {
-                location.setMap(this.props.map);
-                console.log(location.title);
-            }
+      markers.forEach(location => {
+        if (location.title.toLowerCase().match(query) !== null) {
+            location.setMap(map);
+          } else {
+            return null
+          }
         });
     }
 
 
     toggleIcon = (icon) => {
-        const circleDown = <i className='fas fa-arrow-alt-circle-down'> </i>
         this.setState({showLocations: !this.state.showLocations})
-
-        //icon.toggle.circleDown
     }
 
     showOnClick = e => {
@@ -64,8 +52,7 @@ class TopSidebar extends Component {
 
 
     render() {
-        let {localArts, markers} = this.props
-        window.testMe = this.props;
+        let {localArts} = this.props
         let filterLocations = localArts.filter((localArt) => {
             return localArt.venue.name.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
 
@@ -88,7 +75,6 @@ class TopSidebar extends Component {
                     <input className='see-options' type='text' placeholder='Filter Results' value={this.state.query}
                            onChange={(event) => {
                                this.filteredLocations(event.target.value)
-                               //this.filteredMarkers()
                            }}/>
 
                 </nav>
