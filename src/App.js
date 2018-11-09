@@ -28,7 +28,12 @@ class App extends Component {
 
 
     componentDidMount() {
+
         this.getLocalArts()
+        setTimeout(function(){ if(window.google) {
+     console.log("maps work");
+   } else { alert('Sorry, there seems to be an error');} }, 2000);
+
     }
 
     loadMap = () => {
@@ -147,7 +152,7 @@ class App extends Component {
 function getScriptURL(url) {
     const index = window.document.getElementsByTagName('script')[0]
     const scriptKey = window.document.createElement('script')
-    scriptKey.onerror = function() {handleError()}
+    scriptKey.onerror = function () {handleError()}
     scriptKey.src = url
     scriptKey.async = true
     scriptKey.defer = true
@@ -156,5 +161,7 @@ function getScriptURL(url) {
 function handleError() {
   alert('The image could not be loaded.')
 }
+
+
 
 export default App;
