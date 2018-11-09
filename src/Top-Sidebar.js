@@ -64,12 +64,14 @@ class TopSidebar extends Component {
             <div className='options'>
                 <h2 className='top-sidebar'>Art and Theater</h2>
                 <nav className='drop-down-filter' role='navigation'>
-                    <button className='button'>
-                        <i className='fas fa-arrow-alt-circle-up' tab-index='0'
+                    <button className='button' aria-label='toggle list-items'>
+                        <i className='fas fa-arrow-alt-circle-up' tabIndex='0'
+                           aria-pressed='true'
                            style={{color: '#0B3C5D', cursor: 'pointer'}} type='button' role='button'
                            value='Hide options' onClick={this.toggleIcon}/>
 
                         <i className='fas fa-arrow-alt-circle-down'
+                           aria-pressed='false'
                            style={{color: '#0B3C5D', cursor: 'pointer'}} type='button'
                            value='Show options' onClick={this.toggleIcon}/>
                     </button>
@@ -78,9 +80,9 @@ class TopSidebar extends Component {
                                this.filteredLocations(event.target.value)
                            }}/>
 
-                </nav>
 
-                <div className='show-locations'>
+
+                <div className='show-locations' >
 
                     {this.state.showLocations ? (
 
@@ -89,10 +91,13 @@ class TopSidebar extends Component {
                             {filterLocations.map((localArt) => {
                                 return (
 
-                                    <li key={localArt.venue.id} className='list-item'
-                                        onClick={() => this.props.listItemClick(localArt.venue.name)}>
-                                        {localArt.venue.name}
+                                    <li key={localArt.venue.id} className='list-item'>
 
+                                      <button aria-label='Location on map' className='list-item' tabIndex='0'
+                                        onClick={() => this.props.listItemClick(localArt.venue.name)}
+                                        >
+                                        {localArt.venue.name}
+                                      </button>
                                     </li>
 
                                 )
@@ -104,6 +109,7 @@ class TopSidebar extends Component {
                   }
 
                 </div>
+                  </nav>
                 <h6>Location information sourced via Foursquare</h6>
             </div>
         );

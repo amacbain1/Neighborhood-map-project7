@@ -16,16 +16,15 @@ import axios from 'axios'
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.markers = null;
-        this.state = {
+
+        markers = null;
+        state = {
             infowindow: null,
             localArts: [],
             markers: [],
             map: null,
         }
-    }
+
 
 
     componentDidMount() {
@@ -46,7 +45,7 @@ class App extends Component {
             v: '20181015',
             section: 'arts',
             near: 'Redlands, CA',
-            limit: 13
+            limit: 15
 
         }
         axios.get(endPoint + new URLSearchParams(parameters))
@@ -56,7 +55,7 @@ class App extends Component {
                 }, this.loadMap())
             })
             .catch = (error) => {
-            console.log(error + ': Sorry, there seems to be an error')
+            alert(error + ': Sorry, there seems to be an error')
         }
     }
 
@@ -148,10 +147,14 @@ class App extends Component {
 function getScriptURL(url) {
     const index = window.document.getElementsByTagName('script')[0]
     const scriptKey = window.document.createElement('script')
+    scriptKey.onerror = function() {handleError()}
     scriptKey.src = url
     scriptKey.async = true
     scriptKey.defer = true
     index.parentNode.insertBefore(scriptKey, index)
+}
+function handleError() {
+  alert('The image could not be loaded.')
 }
 
 export default App;

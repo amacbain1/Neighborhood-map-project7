@@ -52,9 +52,6 @@ h2.top-sidebar{
   margin-bottom: 0;
 }
 
-.show-locations {
-  overflow: auto;
-}
 
 .list-museums {
   font-size: 1.0em;
@@ -98,9 +95,15 @@ h2.top-sidebar{
     z-index: 100;
     width: 250px;
     max-width: 75%;
-    height: 100vh;
     margin: 0;
+    height: calc(100vh - 28px)
   }
+
+  .show-locations {
+    overflow-y: scroll;
+    height: calc(100vh - 200px)
+  }
+
 
   .drop-down-filter {
     width: 100%;
