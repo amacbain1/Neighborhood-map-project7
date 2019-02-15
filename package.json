@@ -2,6 +2,7 @@
   "name": "neighborhood-map",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/amacbain1/udacity-neighborhoodmap.git",
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.4.1",
     "axios": "^0.18.0",
@@ -11,6 +12,8 @@
     "react-scripts": "2.0.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

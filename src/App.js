@@ -29,11 +29,12 @@ class App extends Component {
 
     componentDidMount() {
 
-        this.getLocalArts()
-        setTimeout(function(){ if(window.google) {
-     console.log("maps work");
-   } else { alert('Sorry, there seems to be an error');} }, 2000);
-
+      this.getLocalArts()
+      setTimeout(function(){
+        if(window.google) {
+          console.log("maps work");
+          } else {
+            alert('Sorry, there seems to be an error');} }, 2000);
     }
 
     loadMap = () => {

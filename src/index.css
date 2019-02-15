@@ -60,6 +60,9 @@ h2.top-sidebar{
 .list-item {
   margin: 10px;
   cursor: pointer;
+  padding: 0;
+  display: flex;
+  width: 100%;
 }
 
 .drop-down-filter {
