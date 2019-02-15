@@ -2,7 +2,7 @@
   "name": "neighborhood-map",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/amacbain1/udacity-neighborhoodmap.git",
+  "homepage": "https://github.com/amacbain1/Neighborhood-map-project7.git",
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.4.1",
     "axios": "^0.18.0",
