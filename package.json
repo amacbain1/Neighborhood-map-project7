@@ -2,7 +2,7 @@
   "name": "neighborhood-map",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/amacbain1/Neighborhood-map-project7.git",
+  "homepage": "https://amacbain1.github.io/Neighborhood-map-project7/",
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.4.1",
     "axios": "^0.18.0",
